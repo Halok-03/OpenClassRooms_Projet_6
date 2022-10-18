@@ -14,4 +14,4 @@
 
 6/ cd front, npm install , npm start
 
-# Le site front sera normalement ouvert port 4200 , le back au port que vous avez renseigné ou par défaut port 3000.
+Le site front sera alors ouvert au port 4200 , le back au port que vous avez renseigné ou par défaut port 3000.
