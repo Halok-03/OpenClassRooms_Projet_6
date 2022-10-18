@@ -1,5 +1,9 @@
 # OpenClassRooms_Projet_6
 
+# Objectifs
+
+Développer une application web nommée "Piquante" dans laquelle les utilisateurs peuvent ajouter leurs sauces préférées et liker ou disliker les sauces proposées par les autres utilisateurs. Le but est de créer le backend de l'application, le frontend étant déjà codé (avec Angular) et fourni.
+
 # Pour démarrer ce projet
 
 1/ Cloner ce repo
