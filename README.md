@@ -10,6 +10,8 @@
 
 4/ cd back , npm install , npm start
 
-5/ cd front, npm install , npm start
+5/ Ouvrez un deuxième terminal et effectuer ces commandes:
+
+6/ cd front, npm install , npm start
 
 # Le site front sera normalement ouvert port 4200 , le back au port que vous avez renseigné ou par défaut port 3000.
