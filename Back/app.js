@@ -8,7 +8,7 @@ require('dotenv').config();
 
 app.use(express.json()); // Remplace bodyparser // 
 
-mongoose.connect(`${process.env.database_url}`,
+mongoose.connect(process.env.database_url,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
