@@ -1,6 +1,7 @@
 const express = require ('express')
 const app = express()
 const mongoose = require('mongoose')
+const path = require('path');
 const saucesRoutes = require('./routes/saucesRoutes')
 const userRoutes = require('./routes/usersRoutes')
 // import environement variables
@@ -21,7 +22,8 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use('/api/sauces', saucesRoutes)
-app.use('/api/auth', userRoutes)
+app.use('/api/sauces', saucesRoutes) // Routes par défaut des sauces
+app.use('/api/auth', userRoutes) // Routes par défaut pour l'inscription/connection
+app.use('/images', express.static(path.join(__dirname, 'images'))) // Permet l'acces a la ressource statique image
 
 module.exports = app 

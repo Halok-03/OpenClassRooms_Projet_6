@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const MongooseErrors = require('mongoose-errors')
 
 const SauceModel = mongoose.Schema(
     {
@@ -48,5 +49,7 @@ const SauceModel = mongoose.Schema(
         },
     }
 )
+
+SauceModel.plugin(MongooseErrors)
 
 module.exports = mongoose.model('piquantes', SauceModel)
