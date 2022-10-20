@@ -40,11 +40,11 @@ const SauceModel = mongoose.Schema(
             required: true
         },
         usersLiked: {
-            type: ["String <userId"],
+            type: [ "String <userId>" ],
             required: true
         },
         usersDisliked: {
-            type: ["String <userId"],
+            type: [ "String <userId>" ],
             required: true
         },
     }
@@ -52,4 +52,4 @@ const SauceModel = mongoose.Schema(
 
 SauceModel.plugin(MongooseErrors)
 
-module.exports = mongoose.model('piquantes', SauceModel)
+module.exports = mongoose.model('sauce', SauceModel)
