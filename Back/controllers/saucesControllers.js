@@ -1,7 +1,7 @@
 const SauceModel  = require('../models/saucesModels') // Import du models sauces //
 const fs = require('fs') // Fs (File System) donne accés aux fonctions qui permettent de modifier le système de fichiers y compris aux fonctions qui permettent de les supprimer
 
-// get all sauces 
+// get all sauces
 exports.getAllSauces = (req, res, next) => {
     SauceModel.find()
     .then((sauces) => { res.status(200).json(sauces)}
@@ -16,7 +16,8 @@ exports.getOneSauce = (req, res, next) => {
     )
 };
 
-// post sauce
+/* post sauce */
+  
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce) // On parse la requète puisque l'objet est envoyé en chaine de caractère du à l'image
     delete sauceObject._id // On supprime l'id car il va être généré par la DB
@@ -48,12 +49,18 @@ exports.modifySauce =  (req, res, next) => {
         if (sauce.userId != req.auth.userId) { // Si l'userId n'est pas celui qui à créer la sauce alors nous n'autorisons pas la modification
             res.status(403).json({ message : "unauthorized request" })
         } else {
-            const filename = sauce.imageUrl.split('/images/')[1] // Nous récupérons le liens qui mene au fichier dans le dossier images
-            fs.unlink(`images/${filename}`, () => { // grace a 'fs' que nous avons importé en haut nous utilisons la methode unlink afin de supprimer le fichier image dans le dossier images
+            if (req.file){
+                const filename = sauce.imageUrl.split('/images/')[1] // Nous récupérons le liens qui mene au fichier dans le dossier images
+                fs.unlink(`images/${filename}`, () => { // grace a 'fs' que nous avons importé en haut nous utilisons la methode unlink afin de supprimer le fichier image dans le dossier images
+                    SauceModel.updateOne({ _id: req.params.id}, {...sauceObject, _id: req.params.id})
+                    .then(res.status(201).json({ message: 'Sauce modifiée avec succés!' }))
+                    .catch((error) => { res.status(400).json({ error: error })})
+            }) 
+            } else {
                 SauceModel.updateOne({ _id: req.params.id}, {...sauceObject, _id: req.params.id})
-                .then(res.status(201).json({ message: 'Sauce modifiée avec succés!' }))
-                .catch((error) => { res.status(400).json({ error: error })})
-            })
+                    .then(res.status(201).json({ message: 'Sauce modifiée avec succés!' }))
+                    .catch((error) => { res.status(400).json({ error: error })})
+            } 
         }
     })
     .catch((error) => { res.status(500).json({ error: error })})
@@ -144,7 +151,7 @@ exports.postLike = (req, res, next) => {
                 .catch(error => res.status(401).json({ error }));
             } 
         }else { // Sinon (si le user essaye de like alors qu'il a deja like , si il essaye de dislike alors qu'il a deja dislike)
-            return res.status(401).json({ error })
+            return res.status(400).json({ error })
         }
     }).catch((error) => { res.status(500).json({ error: error })})
 }
