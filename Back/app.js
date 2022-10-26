@@ -3,7 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const path = require('path');
 const saucesRoutes = require('./routes/saucesRoutes')
-const userRoutes = require('./routes/usersRoutes')
+const usersRoutes = require('./routes/usersRoutes')
 // import environement variables
 require('dotenv').config();
 
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   });
 
 app.use('/api/sauces', saucesRoutes) // Routes par défaut des sauces
-app.use('/api/auth', userRoutes) // Routes par défaut pour l'inscription/connection
+app.use('/api/auth', usersRoutes) // Routes par défaut pour l'inscription/connection
 app.use('/images', express.static(path.join(__dirname, 'images'))) // Permet l'acces a la ressource statique image
 
 module.exports = app 

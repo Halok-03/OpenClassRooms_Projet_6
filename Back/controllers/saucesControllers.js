@@ -32,6 +32,7 @@ exports.createSauce = (req, res, next) => {
         usersDisliked: [],
     });
     newSauce.save()
+    console.log(newSauce)
     .then( () => { res.status(201).json({ message: 'Sauce enregistré avec succés!' })}
     ).catch((error) => { res.status(400).json({ error: error })}
     );
@@ -86,7 +87,7 @@ exports.deleteOneSauce = (req, res, next) => {
 }
 
 exports.postLike = (req, res, next) => {
-    SauceModel.findOne({_id: req.params.id})  // On identifie la sauce a supprimer grace a l'id params //
+    SauceModel.findOne({_id: req.params.id})  // On identifie la sauce grace a l'id params //
     .then ((sauce) => {
         if (req.body.like === 1 && !sauce.usersLiked.includes(req.auth.userId)) { // Si l'utilisateur like et n'as pas deja like
             if(sauce.usersDisliked.includes(req.auth.userId)) { // Si l'user a deja dislike au moment de like 
