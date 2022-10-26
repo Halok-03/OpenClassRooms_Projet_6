@@ -32,7 +32,6 @@ exports.createSauce = (req, res, next) => {
         usersDisliked: [],
     });
     newSauce.save()
-    console.log(newSauce)
     .then( () => { res.status(201).json({ message: 'Sauce enregistré avec succés!' })}
     ).catch((error) => { res.status(400).json({ error: error })}
     );
